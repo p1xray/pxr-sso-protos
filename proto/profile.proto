@@ -9,6 +9,7 @@ import "google/protobuf/wrappers.proto";
 
 service SsoProfile {
   rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+  rpc EditProfile(EditProfileRequest) returns (EditProfileResponse);
 }
 
 enum Gender {
@@ -28,4 +29,16 @@ message GetProfileResponse {
   google.protobuf.Timestamp dateOfBirth = 4;
   Gender gender = 5;
   google.protobuf.StringValue avatarFileKey = 6;
+}
+
+message EditProfileRequest {
+  int64 userId = 1;
+  string fullName = 3;
+  google.protobuf.Timestamp dateOfBirth = 4;
+  Gender gender = 5;
+  google.protobuf.StringValue avatarFileKey = 6;
+}
+
+message EditProfileResponse {
+  bool success = 1;
 }
