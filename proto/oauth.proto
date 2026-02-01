@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package sso;
+package oauth;
 
 option go_package = "pxr.oauth;oauthpb;";
 
-service Sso {
+service Oauth {
   rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc Register (RegisterRequest) returns (RegisterResponse);

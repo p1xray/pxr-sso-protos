@@ -19,215 +19,215 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Sso_Authorize_FullMethodName = "/sso.Sso/Authorize"
-	Sso_Login_FullMethodName     = "/sso.Sso/Login"
-	Sso_Register_FullMethodName  = "/sso.Sso/Register"
-	Sso_Token_FullMethodName     = "/sso.Sso/Token"
+	Oauth_Authorize_FullMethodName = "/oauth.Oauth/Authorize"
+	Oauth_Login_FullMethodName     = "/oauth.Oauth/Login"
+	Oauth_Register_FullMethodName  = "/oauth.Oauth/Register"
+	Oauth_Token_FullMethodName     = "/oauth.Oauth/Token"
 )
 
-// SsoClient is the client API for Sso service.
+// OauthClient is the client API for Oauth service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SsoClient interface {
+type OauthClient interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Token(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
 }
 
-type ssoClient struct {
+type oauthClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSsoClient(cc grpc.ClientConnInterface) SsoClient {
-	return &ssoClient{cc}
+func NewOauthClient(cc grpc.ClientConnInterface) OauthClient {
+	return &oauthClient{cc}
 }
 
-func (c *ssoClient) Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error) {
+func (c *oauthClient) Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthorizeResponse)
-	err := c.cc.Invoke(ctx, Sso_Authorize_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Oauth_Authorize_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ssoClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *oauthClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, Sso_Login_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Oauth_Login_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ssoClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
+func (c *oauthClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterResponse)
-	err := c.cc.Invoke(ctx, Sso_Register_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Oauth_Register_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *ssoClient) Token(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error) {
+func (c *oauthClient) Token(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TokenResponse)
-	err := c.cc.Invoke(ctx, Sso_Token_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Oauth_Token_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// SsoServer is the server API for Sso service.
-// All implementations must embed UnimplementedSsoServer
+// OauthServer is the server API for Oauth service.
+// All implementations must embed UnimplementedOauthServer
 // for forward compatibility.
-type SsoServer interface {
+type OauthServer interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Token(context.Context, *TokenRequest) (*TokenResponse, error)
-	mustEmbedUnimplementedSsoServer()
+	mustEmbedUnimplementedOauthServer()
 }
 
-// UnimplementedSsoServer must be embedded to have
+// UnimplementedOauthServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedSsoServer struct{}
+type UnimplementedOauthServer struct{}
 
-func (UnimplementedSsoServer) Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error) {
+func (UnimplementedOauthServer) Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
 }
-func (UnimplementedSsoServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
+func (UnimplementedOauthServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedSsoServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
+func (UnimplementedOauthServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
-func (UnimplementedSsoServer) Token(context.Context, *TokenRequest) (*TokenResponse, error) {
+func (UnimplementedOauthServer) Token(context.Context, *TokenRequest) (*TokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Token not implemented")
 }
-func (UnimplementedSsoServer) mustEmbedUnimplementedSsoServer() {}
-func (UnimplementedSsoServer) testEmbeddedByValue()             {}
+func (UnimplementedOauthServer) mustEmbedUnimplementedOauthServer() {}
+func (UnimplementedOauthServer) testEmbeddedByValue()               {}
 
-// UnsafeSsoServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SsoServer will
+// UnsafeOauthServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OauthServer will
 // result in compilation errors.
-type UnsafeSsoServer interface {
-	mustEmbedUnimplementedSsoServer()
+type UnsafeOauthServer interface {
+	mustEmbedUnimplementedOauthServer()
 }
 
-func RegisterSsoServer(s grpc.ServiceRegistrar, srv SsoServer) {
-	// If the following call pancis, it indicates UnimplementedSsoServer was
+func RegisterOauthServer(s grpc.ServiceRegistrar, srv OauthServer) {
+	// If the following call pancis, it indicates UnimplementedOauthServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Sso_ServiceDesc, srv)
+	s.RegisterService(&Oauth_ServiceDesc, srv)
 }
 
-func _Sso_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Oauth_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AuthorizeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SsoServer).Authorize(ctx, in)
+		return srv.(OauthServer).Authorize(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Sso_Authorize_FullMethodName,
+		FullMethod: Oauth_Authorize_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SsoServer).Authorize(ctx, req.(*AuthorizeRequest))
+		return srv.(OauthServer).Authorize(ctx, req.(*AuthorizeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sso_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Oauth_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SsoServer).Login(ctx, in)
+		return srv.(OauthServer).Login(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Sso_Login_FullMethodName,
+		FullMethod: Oauth_Login_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SsoServer).Login(ctx, req.(*LoginRequest))
+		return srv.(OauthServer).Login(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sso_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Oauth_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SsoServer).Register(ctx, in)
+		return srv.(OauthServer).Register(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Sso_Register_FullMethodName,
+		FullMethod: Oauth_Register_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SsoServer).Register(ctx, req.(*RegisterRequest))
+		return srv.(OauthServer).Register(ctx, req.(*RegisterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sso_Token_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Oauth_Token_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SsoServer).Token(ctx, in)
+		return srv.(OauthServer).Token(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Sso_Token_FullMethodName,
+		FullMethod: Oauth_Token_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SsoServer).Token(ctx, req.(*TokenRequest))
+		return srv.(OauthServer).Token(ctx, req.(*TokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Sso_ServiceDesc is the grpc.ServiceDesc for Sso service.
+// Oauth_ServiceDesc is the grpc.ServiceDesc for Oauth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Sso_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sso.Sso",
-	HandlerType: (*SsoServer)(nil),
+var Oauth_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "oauth.Oauth",
+	HandlerType: (*OauthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Authorize",
-			Handler:    _Sso_Authorize_Handler,
+			Handler:    _Oauth_Authorize_Handler,
 		},
 		{
 			MethodName: "Login",
-			Handler:    _Sso_Login_Handler,
+			Handler:    _Oauth_Login_Handler,
 		},
 		{
 			MethodName: "Register",
-			Handler:    _Sso_Register_Handler,
+			Handler:    _Oauth_Register_Handler,
 		},
 		{
 			MethodName: "Token",
-			Handler:    _Sso_Token_Handler,
+			Handler:    _Oauth_Token_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

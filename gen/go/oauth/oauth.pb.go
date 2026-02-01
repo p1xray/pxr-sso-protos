@@ -617,7 +617,7 @@ var File_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_proto_rawDesc = "" +
 	"\n" +
-	"\voauth.proto\x12\x03sso\"\xf8\x01\n" +
+	"\voauth.proto\x12\x05oauth\"\xf8\x01\n" +
 	"\x10AuthorizeRequest\x12\"\n" +
 	"\fresponseType\x18\x01 \x03(\tR\fresponseType\x12\x1a\n" +
 	"\bclientId\x18\x02 \x03(\tR\bclientId\x12 \n" +
@@ -663,12 +663,12 @@ const file_oauth_proto_rawDesc = "" +
 	"\ttokenType\x18\x02 \x01(\tR\ttokenType\x12\x1c\n" +
 	"\texpiresIn\x18\x03 \x01(\rR\texpiresIn\x12\"\n" +
 	"\frefreshToken\x18\x04 \x01(\tR\frefreshToken\x12\x18\n" +
-	"\aidToken\x18\x05 \x01(\tR\aidToken2\xda\x01\n" +
-	"\x03Sso\x12:\n" +
-	"\tAuthorize\x12\x15.sso.AuthorizeRequest\x1a\x16.sso.AuthorizeResponse\x12.\n" +
-	"\x05Login\x12\x11.sso.LoginRequest\x1a\x12.sso.LoginResponse\x127\n" +
-	"\bRegister\x12\x14.sso.RegisterRequest\x1a\x15.sso.RegisterResponse\x12.\n" +
-	"\x05Token\x12\x11.sso.TokenRequest\x1a\x12.sso.TokenResponseB\x14Z\x12pxr.oauth;oauthpb;b\x06proto3"
+	"\aidToken\x18\x05 \x01(\tR\aidToken2\xec\x01\n" +
+	"\x05Oauth\x12>\n" +
+	"\tAuthorize\x12\x17.oauth.AuthorizeRequest\x1a\x18.oauth.AuthorizeResponse\x122\n" +
+	"\x05Login\x12\x13.oauth.LoginRequest\x1a\x14.oauth.LoginResponse\x12;\n" +
+	"\bRegister\x12\x16.oauth.RegisterRequest\x1a\x17.oauth.RegisterResponse\x122\n" +
+	"\x05Token\x12\x13.oauth.TokenRequest\x1a\x14.oauth.TokenResponseB\x14Z\x12pxr.oauth;oauthpb;b\x06proto3"
 
 var (
 	file_oauth_proto_rawDescOnce sync.Once
@@ -684,24 +684,24 @@ func file_oauth_proto_rawDescGZIP() []byte {
 
 var file_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_oauth_proto_goTypes = []any{
-	(*AuthorizeRequest)(nil),  // 0: sso.AuthorizeRequest
-	(*AuthorizeResponse)(nil), // 1: sso.AuthorizeResponse
-	(*LoginRequest)(nil),      // 2: sso.LoginRequest
-	(*LoginResponse)(nil),     // 3: sso.LoginResponse
-	(*RegisterRequest)(nil),   // 4: sso.RegisterRequest
-	(*RegisterResponse)(nil),  // 5: sso.RegisterResponse
-	(*TokenRequest)(nil),      // 6: sso.TokenRequest
-	(*TokenResponse)(nil),     // 7: sso.TokenResponse
+	(*AuthorizeRequest)(nil),  // 0: oauth.AuthorizeRequest
+	(*AuthorizeResponse)(nil), // 1: oauth.AuthorizeResponse
+	(*LoginRequest)(nil),      // 2: oauth.LoginRequest
+	(*LoginResponse)(nil),     // 3: oauth.LoginResponse
+	(*RegisterRequest)(nil),   // 4: oauth.RegisterRequest
+	(*RegisterResponse)(nil),  // 5: oauth.RegisterResponse
+	(*TokenRequest)(nil),      // 6: oauth.TokenRequest
+	(*TokenResponse)(nil),     // 7: oauth.TokenResponse
 }
 var file_oauth_proto_depIdxs = []int32{
-	0, // 0: sso.Sso.Authorize:input_type -> sso.AuthorizeRequest
-	2, // 1: sso.Sso.Login:input_type -> sso.LoginRequest
-	4, // 2: sso.Sso.Register:input_type -> sso.RegisterRequest
-	6, // 3: sso.Sso.Token:input_type -> sso.TokenRequest
-	1, // 4: sso.Sso.Authorize:output_type -> sso.AuthorizeResponse
-	3, // 5: sso.Sso.Login:output_type -> sso.LoginResponse
-	5, // 6: sso.Sso.Register:output_type -> sso.RegisterResponse
-	7, // 7: sso.Sso.Token:output_type -> sso.TokenResponse
+	0, // 0: oauth.Oauth.Authorize:input_type -> oauth.AuthorizeRequest
+	2, // 1: oauth.Oauth.Login:input_type -> oauth.LoginRequest
+	4, // 2: oauth.Oauth.Register:input_type -> oauth.RegisterRequest
+	6, // 3: oauth.Oauth.Token:input_type -> oauth.TokenRequest
+	1, // 4: oauth.Oauth.Authorize:output_type -> oauth.AuthorizeResponse
+	3, // 5: oauth.Oauth.Login:output_type -> oauth.LoginResponse
+	5, // 6: oauth.Oauth.Register:output_type -> oauth.RegisterResponse
+	7, // 7: oauth.Oauth.Token:output_type -> oauth.TokenResponse
 	4, // [4:8] is the sub-list for method output_type
 	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
