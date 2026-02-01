@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package sso;
+
+option go_package = "pxr.oauth;oauthpb;";
+
+service Sso {
+  rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Token (TokenRequest) returns (TokenResponse);
+}
+
+message AuthorizeRequest {
+  repeated string responseType = 1;
+  repeated string clientId = 2;
+  repeated string redirectUri = 3;
+  repeated string codeChallenge = 4;
+  repeated string codeChallengeMethod = 5;
+  repeated string state = 6;
+  repeated string scope = 7;
+}
+
+message AuthorizeResponse {
+  string redirectUri = 1;
+}
+
+message LoginRequest {
+  string flowId = 1;
+  string responseType = 2;
+  string clientId = 3;
+  string redirectUri = 4;
+  string state = 5;
+  string scope = 6;
+  string username = 7;
+  string password = 8;
+}
+
+message LoginResponse {
+  string redirectUri = 1;
+}
+
+message RegisterRequest {
+  string flowId = 1;
+  string responseType = 2;
+  string clientId = 3;
+  string redirectUri = 4;
+  string state = 5;
+  string scope = 6;
+  string username = 7;
+  string password = 8;
+  string fullName = 9;
+}
+
+message RegisterResponse {
+  string redirectUri = 1;
+}
+
+message TokenRequest {
+  string flowId = 1;
+  string grantType = 2;
+  string clientId = 3;
+  string code = 4;
+  string redirectURI = 5;
+  string codeVerifier = 6;
+}
+
+message TokenResponse {
+  string accessToken = 1;
+  string tokenType = 2;
+  uint32 expiresIn = 3;
+  string refreshToken = 4;
+  string idToken = 5;
+}
