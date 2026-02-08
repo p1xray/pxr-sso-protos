@@ -709,7 +709,7 @@ type TokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
 	TokenType     string                 `protobuf:"bytes,2,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
-	ExpiresIn     uint32                 `protobuf:"varint,3,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
+	ExpiresIn     int64                  `protobuf:"varint,3,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
 	RefreshToken  string                 `protobuf:"bytes,4,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
 	IdToken       string                 `protobuf:"bytes,5,opt,name=idToken,proto3" json:"idToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -760,7 +760,7 @@ func (x *TokenResponse) GetTokenType() string {
 	return ""
 }
 
-func (x *TokenResponse) GetExpiresIn() uint32 {
+func (x *TokenResponse) GetExpiresIn() int64 {
 	if x != nil {
 		return x.ExpiresIn
 	}
@@ -843,7 +843,7 @@ const file_oauth_proto_rawDesc = "" +
 	"\rTokenResponse\x12 \n" +
 	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\x1c\n" +
 	"\ttokenType\x18\x02 \x01(\tR\ttokenType\x12\x1c\n" +
-	"\texpiresIn\x18\x03 \x01(\rR\texpiresIn\x12\"\n" +
+	"\texpiresIn\x18\x03 \x01(\x03R\texpiresIn\x12\"\n" +
 	"\frefreshToken\x18\x04 \x01(\tR\frefreshToken\x12\x18\n" +
 	"\aidToken\x18\x05 \x01(\tR\aidToken2\xa6\x02\n" +
 	"\x05Oauth\x12>\n" +

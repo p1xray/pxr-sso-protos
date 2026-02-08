@@ -87,7 +87,7 @@ message TokenRequest {
 message TokenResponse {
   string accessToken = 1;
   string tokenType = 2;
-  uint32 expiresIn = 3;
+  int64 expiresIn = 3;
   string refreshToken = 4;
   string idToken = 5;
 }
