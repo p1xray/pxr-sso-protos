@@ -22,6 +22,7 @@ const (
 	Oauth_Authorize_FullMethodName = "/oauth.Oauth/Authorize"
 	Oauth_Login_FullMethodName     = "/oauth.Oauth/Login"
 	Oauth_Register_FullMethodName  = "/oauth.Oauth/Register"
+	Oauth_Consent_FullMethodName   = "/oauth.Oauth/Consent"
 	Oauth_Token_FullMethodName     = "/oauth.Oauth/Token"
 )
 
@@ -32,6 +33,7 @@ type OauthClient interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	Consent(ctx context.Context, in *ConsentRequest, opts ...grpc.CallOption) (*ConsentResponse, error)
 	Token(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
 }
 
@@ -73,6 +75,16 @@ func (c *oauthClient) Register(ctx context.Context, in *RegisterRequest, opts ..
 	return out, nil
 }
 
+func (c *oauthClient) Consent(ctx context.Context, in *ConsentRequest, opts ...grpc.CallOption) (*ConsentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConsentResponse)
+	err := c.cc.Invoke(ctx, Oauth_Consent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *oauthClient) Token(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TokenResponse)
@@ -90,6 +102,7 @@ type OauthServer interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	Consent(context.Context, *ConsentRequest) (*ConsentResponse, error)
 	Token(context.Context, *TokenRequest) (*TokenResponse, error)
 	mustEmbedUnimplementedOauthServer()
 }
@@ -109,6 +122,9 @@ func (UnimplementedOauthServer) Login(context.Context, *LoginRequest) (*LoginRes
 }
 func (UnimplementedOauthServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedOauthServer) Consent(context.Context, *ConsentRequest) (*ConsentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Consent not implemented")
 }
 func (UnimplementedOauthServer) Token(context.Context, *TokenRequest) (*TokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Token not implemented")
@@ -188,6 +204,24 @@ func _Oauth_Register_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Oauth_Consent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConsentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthServer).Consent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Oauth_Consent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthServer).Consent(ctx, req.(*ConsentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Oauth_Token_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TokenRequest)
 	if err := dec(in); err != nil {
@@ -224,6 +258,10 @@ var Oauth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Register",
 			Handler:    _Oauth_Register_Handler,
+		},
+		{
+			MethodName: "Consent",
+			Handler:    _Oauth_Consent_Handler,
 		},
 		{
 			MethodName: "Token",

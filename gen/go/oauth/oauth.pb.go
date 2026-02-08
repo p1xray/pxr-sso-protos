@@ -164,7 +164,7 @@ type LoginRequest struct {
 	ClientId      string                 `protobuf:"bytes,3,opt,name=clientId,proto3" json:"clientId,omitempty"`
 	RedirectUri   string                 `protobuf:"bytes,4,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
 	State         string                 `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
-	Scope         string                 `protobuf:"bytes,6,opt,name=scope,proto3" json:"scope,omitempty"`
+	Scope         []string               `protobuf:"bytes,6,rep,name=scope,proto3" json:"scope,omitempty"`
 	Username      string                 `protobuf:"bytes,7,opt,name=username,proto3" json:"username,omitempty"`
 	Password      string                 `protobuf:"bytes,8,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -236,11 +236,11 @@ func (x *LoginRequest) GetState() string {
 	return ""
 }
 
-func (x *LoginRequest) GetScope() string {
+func (x *LoginRequest) GetScope() []string {
 	if x != nil {
 		return x.Scope
 	}
-	return ""
+	return nil
 }
 
 func (x *LoginRequest) GetUsername() string {
@@ -258,10 +258,12 @@ func (x *LoginRequest) GetPassword() string {
 }
 
 type LoginResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RedirectUri   string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	RedirectUri          string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	DisplayErrorMessage  string                 `protobuf:"bytes,2,opt,name=displayErrorMessage,proto3" json:"displayErrorMessage,omitempty"`
+	InternalErrorMessage string                 `protobuf:"bytes,3,opt,name=internalErrorMessage,proto3" json:"internalErrorMessage,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *LoginResponse) Reset() {
@@ -301,6 +303,20 @@ func (x *LoginResponse) GetRedirectUri() string {
 	return ""
 }
 
+func (x *LoginResponse) GetDisplayErrorMessage() string {
+	if x != nil {
+		return x.DisplayErrorMessage
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetInternalErrorMessage() string {
+	if x != nil {
+		return x.InternalErrorMessage
+	}
+	return ""
+}
+
 type RegisterRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FlowId        string                 `protobuf:"bytes,1,opt,name=flowId,proto3" json:"flowId,omitempty"`
@@ -308,7 +324,7 @@ type RegisterRequest struct {
 	ClientId      string                 `protobuf:"bytes,3,opt,name=clientId,proto3" json:"clientId,omitempty"`
 	RedirectUri   string                 `protobuf:"bytes,4,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
 	State         string                 `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
-	Scope         string                 `protobuf:"bytes,6,opt,name=scope,proto3" json:"scope,omitempty"`
+	Scope         []string               `protobuf:"bytes,6,rep,name=scope,proto3" json:"scope,omitempty"`
 	Username      string                 `protobuf:"bytes,7,opt,name=username,proto3" json:"username,omitempty"`
 	Password      string                 `protobuf:"bytes,8,opt,name=password,proto3" json:"password,omitempty"`
 	FullName      string                 `protobuf:"bytes,9,opt,name=fullName,proto3" json:"fullName,omitempty"`
@@ -381,11 +397,11 @@ func (x *RegisterRequest) GetState() string {
 	return ""
 }
 
-func (x *RegisterRequest) GetScope() string {
+func (x *RegisterRequest) GetScope() []string {
 	if x != nil {
 		return x.Scope
 	}
-	return ""
+	return nil
 }
 
 func (x *RegisterRequest) GetUsername() string {
@@ -410,10 +426,12 @@ func (x *RegisterRequest) GetFullName() string {
 }
 
 type RegisterResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RedirectUri   string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	RedirectUri          string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	DisplayErrorMessage  string                 `protobuf:"bytes,2,opt,name=displayErrorMessage,proto3" json:"displayErrorMessage,omitempty"`
+	InternalErrorMessage string                 `protobuf:"bytes,3,opt,name=internalErrorMessage,proto3" json:"internalErrorMessage,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *RegisterResponse) Reset() {
@@ -453,21 +471,164 @@ func (x *RegisterResponse) GetRedirectUri() string {
 	return ""
 }
 
+func (x *RegisterResponse) GetDisplayErrorMessage() string {
+	if x != nil {
+		return x.DisplayErrorMessage
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetInternalErrorMessage() string {
+	if x != nil {
+		return x.InternalErrorMessage
+	}
+	return ""
+}
+
+type ConsentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FlowId        string                 `protobuf:"bytes,1,opt,name=flowId,proto3" json:"flowId,omitempty"`
+	ResponseType  string                 `protobuf:"bytes,2,opt,name=responseType,proto3" json:"responseType,omitempty"`
+	ClientId      string                 `protobuf:"bytes,3,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	RedirectUri   string                 `protobuf:"bytes,4,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	State         string                 `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
+	Scope         []string               `protobuf:"bytes,6,rep,name=scope,proto3" json:"scope,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConsentRequest) Reset() {
+	*x = ConsentRequest{}
+	mi := &file_oauth_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConsentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConsentRequest) ProtoMessage() {}
+
+func (x *ConsentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConsentRequest.ProtoReflect.Descriptor instead.
+func (*ConsentRequest) Descriptor() ([]byte, []int) {
+	return file_oauth_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ConsentRequest) GetFlowId() string {
+	if x != nil {
+		return x.FlowId
+	}
+	return ""
+}
+
+func (x *ConsentRequest) GetResponseType() string {
+	if x != nil {
+		return x.ResponseType
+	}
+	return ""
+}
+
+func (x *ConsentRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *ConsentRequest) GetRedirectUri() string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return ""
+}
+
+func (x *ConsentRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *ConsentRequest) GetScope() []string {
+	if x != nil {
+		return x.Scope
+	}
+	return nil
+}
+
+type ConsentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RedirectUri   string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConsentResponse) Reset() {
+	*x = ConsentResponse{}
+	mi := &file_oauth_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConsentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConsentResponse) ProtoMessage() {}
+
+func (x *ConsentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConsentResponse.ProtoReflect.Descriptor instead.
+func (*ConsentResponse) Descriptor() ([]byte, []int) {
+	return file_oauth_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ConsentResponse) GetRedirectUri() string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return ""
+}
+
 type TokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FlowId        string                 `protobuf:"bytes,1,opt,name=flowId,proto3" json:"flowId,omitempty"`
 	GrantType     string                 `protobuf:"bytes,2,opt,name=grantType,proto3" json:"grantType,omitempty"`
 	ClientId      string                 `protobuf:"bytes,3,opt,name=clientId,proto3" json:"clientId,omitempty"`
 	Code          string                 `protobuf:"bytes,4,opt,name=code,proto3" json:"code,omitempty"`
-	RedirectURI   string                 `protobuf:"bytes,5,opt,name=redirectURI,proto3" json:"redirectURI,omitempty"`
+	RedirectUri   string                 `protobuf:"bytes,5,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
 	CodeVerifier  string                 `protobuf:"bytes,6,opt,name=codeVerifier,proto3" json:"codeVerifier,omitempty"`
+	Scope         []string               `protobuf:"bytes,7,rep,name=scope,proto3" json:"scope,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TokenRequest) Reset() {
 	*x = TokenRequest{}
-	mi := &file_oauth_proto_msgTypes[6]
+	mi := &file_oauth_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -479,7 +640,7 @@ func (x *TokenRequest) String() string {
 func (*TokenRequest) ProtoMessage() {}
 
 func (x *TokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_oauth_proto_msgTypes[6]
+	mi := &file_oauth_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -492,7 +653,7 @@ func (x *TokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenRequest.ProtoReflect.Descriptor instead.
 func (*TokenRequest) Descriptor() ([]byte, []int) {
-	return file_oauth_proto_rawDescGZIP(), []int{6}
+	return file_oauth_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *TokenRequest) GetFlowId() string {
@@ -523,9 +684,9 @@ func (x *TokenRequest) GetCode() string {
 	return ""
 }
 
-func (x *TokenRequest) GetRedirectURI() string {
+func (x *TokenRequest) GetRedirectUri() string {
 	if x != nil {
-		return x.RedirectURI
+		return x.RedirectUri
 	}
 	return ""
 }
@@ -535,6 +696,13 @@ func (x *TokenRequest) GetCodeVerifier() string {
 		return x.CodeVerifier
 	}
 	return ""
+}
+
+func (x *TokenRequest) GetScope() []string {
+	if x != nil {
+		return x.Scope
+	}
+	return nil
 }
 
 type TokenResponse struct {
@@ -550,7 +718,7 @@ type TokenResponse struct {
 
 func (x *TokenResponse) Reset() {
 	*x = TokenResponse{}
-	mi := &file_oauth_proto_msgTypes[7]
+	mi := &file_oauth_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -562,7 +730,7 @@ func (x *TokenResponse) String() string {
 func (*TokenResponse) ProtoMessage() {}
 
 func (x *TokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_oauth_proto_msgTypes[7]
+	mi := &file_oauth_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -575,7 +743,7 @@ func (x *TokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenResponse.ProtoReflect.Descriptor instead.
 func (*TokenResponse) Descriptor() ([]byte, []int) {
-	return file_oauth_proto_rawDescGZIP(), []int{7}
+	return file_oauth_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *TokenResponse) GetAccessToken() string {
@@ -634,40 +802,55 @@ const file_oauth_proto_rawDesc = "" +
 	"\bclientId\x18\x03 \x01(\tR\bclientId\x12 \n" +
 	"\vredirectUri\x18\x04 \x01(\tR\vredirectUri\x12\x14\n" +
 	"\x05state\x18\x05 \x01(\tR\x05state\x12\x14\n" +
-	"\x05scope\x18\x06 \x01(\tR\x05scope\x12\x1a\n" +
+	"\x05scope\x18\x06 \x03(\tR\x05scope\x12\x1a\n" +
 	"\busername\x18\a \x01(\tR\busername\x12\x1a\n" +
-	"\bpassword\x18\b \x01(\tR\bpassword\"1\n" +
+	"\bpassword\x18\b \x01(\tR\bpassword\"\x97\x01\n" +
 	"\rLoginResponse\x12 \n" +
-	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\"\x8b\x02\n" +
+	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x120\n" +
+	"\x13displayErrorMessage\x18\x02 \x01(\tR\x13displayErrorMessage\x122\n" +
+	"\x14internalErrorMessage\x18\x03 \x01(\tR\x14internalErrorMessage\"\x8b\x02\n" +
 	"\x0fRegisterRequest\x12\x16\n" +
 	"\x06flowId\x18\x01 \x01(\tR\x06flowId\x12\"\n" +
 	"\fresponseType\x18\x02 \x01(\tR\fresponseType\x12\x1a\n" +
 	"\bclientId\x18\x03 \x01(\tR\bclientId\x12 \n" +
 	"\vredirectUri\x18\x04 \x01(\tR\vredirectUri\x12\x14\n" +
 	"\x05state\x18\x05 \x01(\tR\x05state\x12\x14\n" +
-	"\x05scope\x18\x06 \x01(\tR\x05scope\x12\x1a\n" +
+	"\x05scope\x18\x06 \x03(\tR\x05scope\x12\x1a\n" +
 	"\busername\x18\a \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\b \x01(\tR\bpassword\x12\x1a\n" +
-	"\bfullName\x18\t \x01(\tR\bfullName\"4\n" +
+	"\bfullName\x18\t \x01(\tR\bfullName\"\x9a\x01\n" +
 	"\x10RegisterResponse\x12 \n" +
-	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\"\xba\x01\n" +
+	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x120\n" +
+	"\x13displayErrorMessage\x18\x02 \x01(\tR\x13displayErrorMessage\x122\n" +
+	"\x14internalErrorMessage\x18\x03 \x01(\tR\x14internalErrorMessage\"\xb6\x01\n" +
+	"\x0eConsentRequest\x12\x16\n" +
+	"\x06flowId\x18\x01 \x01(\tR\x06flowId\x12\"\n" +
+	"\fresponseType\x18\x02 \x01(\tR\fresponseType\x12\x1a\n" +
+	"\bclientId\x18\x03 \x01(\tR\bclientId\x12 \n" +
+	"\vredirectUri\x18\x04 \x01(\tR\vredirectUri\x12\x14\n" +
+	"\x05state\x18\x05 \x01(\tR\x05state\x12\x14\n" +
+	"\x05scope\x18\x06 \x03(\tR\x05scope\"3\n" +
+	"\x0fConsentResponse\x12 \n" +
+	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\"\xd0\x01\n" +
 	"\fTokenRequest\x12\x16\n" +
 	"\x06flowId\x18\x01 \x01(\tR\x06flowId\x12\x1c\n" +
 	"\tgrantType\x18\x02 \x01(\tR\tgrantType\x12\x1a\n" +
 	"\bclientId\x18\x03 \x01(\tR\bclientId\x12\x12\n" +
 	"\x04code\x18\x04 \x01(\tR\x04code\x12 \n" +
-	"\vredirectURI\x18\x05 \x01(\tR\vredirectURI\x12\"\n" +
-	"\fcodeVerifier\x18\x06 \x01(\tR\fcodeVerifier\"\xab\x01\n" +
+	"\vredirectUri\x18\x05 \x01(\tR\vredirectUri\x12\"\n" +
+	"\fcodeVerifier\x18\x06 \x01(\tR\fcodeVerifier\x12\x14\n" +
+	"\x05scope\x18\a \x03(\tR\x05scope\"\xab\x01\n" +
 	"\rTokenResponse\x12 \n" +
 	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\x1c\n" +
 	"\ttokenType\x18\x02 \x01(\tR\ttokenType\x12\x1c\n" +
 	"\texpiresIn\x18\x03 \x01(\rR\texpiresIn\x12\"\n" +
 	"\frefreshToken\x18\x04 \x01(\tR\frefreshToken\x12\x18\n" +
-	"\aidToken\x18\x05 \x01(\tR\aidToken2\xec\x01\n" +
+	"\aidToken\x18\x05 \x01(\tR\aidToken2\xa6\x02\n" +
 	"\x05Oauth\x12>\n" +
 	"\tAuthorize\x12\x17.oauth.AuthorizeRequest\x1a\x18.oauth.AuthorizeResponse\x122\n" +
 	"\x05Login\x12\x13.oauth.LoginRequest\x1a\x14.oauth.LoginResponse\x12;\n" +
-	"\bRegister\x12\x16.oauth.RegisterRequest\x1a\x17.oauth.RegisterResponse\x122\n" +
+	"\bRegister\x12\x16.oauth.RegisterRequest\x1a\x17.oauth.RegisterResponse\x128\n" +
+	"\aConsent\x12\x15.oauth.ConsentRequest\x1a\x16.oauth.ConsentResponse\x122\n" +
 	"\x05Token\x12\x13.oauth.TokenRequest\x1a\x14.oauth.TokenResponseB\x14Z\x12pxr.oauth;oauthpb;b\x06proto3"
 
 var (
@@ -682,7 +865,7 @@ func file_oauth_proto_rawDescGZIP() []byte {
 	return file_oauth_proto_rawDescData
 }
 
-var file_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_oauth_proto_goTypes = []any{
 	(*AuthorizeRequest)(nil),  // 0: oauth.AuthorizeRequest
 	(*AuthorizeResponse)(nil), // 1: oauth.AuthorizeResponse
@@ -690,20 +873,24 @@ var file_oauth_proto_goTypes = []any{
 	(*LoginResponse)(nil),     // 3: oauth.LoginResponse
 	(*RegisterRequest)(nil),   // 4: oauth.RegisterRequest
 	(*RegisterResponse)(nil),  // 5: oauth.RegisterResponse
-	(*TokenRequest)(nil),      // 6: oauth.TokenRequest
-	(*TokenResponse)(nil),     // 7: oauth.TokenResponse
+	(*ConsentRequest)(nil),    // 6: oauth.ConsentRequest
+	(*ConsentResponse)(nil),   // 7: oauth.ConsentResponse
+	(*TokenRequest)(nil),      // 8: oauth.TokenRequest
+	(*TokenResponse)(nil),     // 9: oauth.TokenResponse
 }
 var file_oauth_proto_depIdxs = []int32{
 	0, // 0: oauth.Oauth.Authorize:input_type -> oauth.AuthorizeRequest
 	2, // 1: oauth.Oauth.Login:input_type -> oauth.LoginRequest
 	4, // 2: oauth.Oauth.Register:input_type -> oauth.RegisterRequest
-	6, // 3: oauth.Oauth.Token:input_type -> oauth.TokenRequest
-	1, // 4: oauth.Oauth.Authorize:output_type -> oauth.AuthorizeResponse
-	3, // 5: oauth.Oauth.Login:output_type -> oauth.LoginResponse
-	5, // 6: oauth.Oauth.Register:output_type -> oauth.RegisterResponse
-	7, // 7: oauth.Oauth.Token:output_type -> oauth.TokenResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	6, // 3: oauth.Oauth.Consent:input_type -> oauth.ConsentRequest
+	8, // 4: oauth.Oauth.Token:input_type -> oauth.TokenRequest
+	1, // 5: oauth.Oauth.Authorize:output_type -> oauth.AuthorizeResponse
+	3, // 6: oauth.Oauth.Login:output_type -> oauth.LoginResponse
+	5, // 7: oauth.Oauth.Register:output_type -> oauth.RegisterResponse
+	7, // 8: oauth.Oauth.Consent:output_type -> oauth.ConsentResponse
+	9, // 9: oauth.Oauth.Token:output_type -> oauth.TokenResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -720,7 +907,7 @@ func file_oauth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_oauth_proto_rawDesc), len(file_oauth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

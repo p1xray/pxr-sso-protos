@@ -8,6 +8,7 @@ service Oauth {
   rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Consent (ConsentRequest) returns (ConsentResponse);
   rpc Token (TokenRequest) returns (TokenResponse);
 }
 
@@ -31,13 +32,15 @@ message LoginRequest {
   string clientId = 3;
   string redirectUri = 4;
   string state = 5;
-  string scope = 6;
+  repeated string scope = 6;
   string username = 7;
   string password = 8;
 }
 
 message LoginResponse {
   string redirectUri = 1;
+  string displayErrorMessage = 2;
+  string internalErrorMessage = 3;
 }
 
 message RegisterRequest {
@@ -46,13 +49,28 @@ message RegisterRequest {
   string clientId = 3;
   string redirectUri = 4;
   string state = 5;
-  string scope = 6;
+  repeated string scope = 6;
   string username = 7;
   string password = 8;
   string fullName = 9;
 }
 
 message RegisterResponse {
+  string redirectUri = 1;
+  string displayErrorMessage = 2;
+  string internalErrorMessage = 3;
+}
+
+message ConsentRequest {
+  string flowId = 1;
+  string responseType = 2;
+  string clientId = 3;
+  string redirectUri = 4;
+  string state = 5;
+  repeated string scope = 6;
+}
+
+message ConsentResponse {
   string redirectUri = 1;
 }
 
@@ -61,8 +79,9 @@ message TokenRequest {
   string grantType = 2;
   string clientId = 3;
   string code = 4;
-  string redirectURI = 5;
+  string redirectUri = 5;
   string codeVerifier = 6;
+  repeated string scope = 7;
 }
 
 message TokenResponse {
