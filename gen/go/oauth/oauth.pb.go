@@ -116,6 +116,7 @@ func (x *AuthorizeRequest) GetScope() []string {
 type AuthorizeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RedirectUri   string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	Error         *ErrorResponse         `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -155,6 +156,13 @@ func (x *AuthorizeResponse) GetRedirectUri() string {
 		return x.RedirectUri
 	}
 	return ""
+}
+
+func (x *AuthorizeResponse) GetError() *ErrorResponse {
+	if x != nil {
+		return x.Error
+	}
+	return nil
 }
 
 type LoginRequest struct {
@@ -258,12 +266,11 @@ func (x *LoginRequest) GetPassword() string {
 }
 
 type LoginResponse struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	RedirectUri          string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
-	DisplayErrorMessage  string                 `protobuf:"bytes,2,opt,name=displayErrorMessage,proto3" json:"displayErrorMessage,omitempty"`
-	InternalErrorMessage string                 `protobuf:"bytes,3,opt,name=internalErrorMessage,proto3" json:"internalErrorMessage,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RedirectUri   string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	Error         *ErrorResponse         `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *LoginResponse) Reset() {
@@ -303,18 +310,11 @@ func (x *LoginResponse) GetRedirectUri() string {
 	return ""
 }
 
-func (x *LoginResponse) GetDisplayErrorMessage() string {
+func (x *LoginResponse) GetError() *ErrorResponse {
 	if x != nil {
-		return x.DisplayErrorMessage
+		return x.Error
 	}
-	return ""
-}
-
-func (x *LoginResponse) GetInternalErrorMessage() string {
-	if x != nil {
-		return x.InternalErrorMessage
-	}
-	return ""
+	return nil
 }
 
 type RegisterRequest struct {
@@ -426,12 +426,11 @@ func (x *RegisterRequest) GetFullName() string {
 }
 
 type RegisterResponse struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	RedirectUri          string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
-	DisplayErrorMessage  string                 `protobuf:"bytes,2,opt,name=displayErrorMessage,proto3" json:"displayErrorMessage,omitempty"`
-	InternalErrorMessage string                 `protobuf:"bytes,3,opt,name=internalErrorMessage,proto3" json:"internalErrorMessage,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RedirectUri   string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	Error         *ErrorResponse         `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RegisterResponse) Reset() {
@@ -471,18 +470,11 @@ func (x *RegisterResponse) GetRedirectUri() string {
 	return ""
 }
 
-func (x *RegisterResponse) GetDisplayErrorMessage() string {
+func (x *RegisterResponse) GetError() *ErrorResponse {
 	if x != nil {
-		return x.DisplayErrorMessage
+		return x.Error
 	}
-	return ""
-}
-
-func (x *RegisterResponse) GetInternalErrorMessage() string {
-	if x != nil {
-		return x.InternalErrorMessage
-	}
-	return ""
+	return nil
 }
 
 type ConsentRequest struct {
@@ -572,6 +564,7 @@ func (x *ConsentRequest) GetScope() []string {
 type ConsentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RedirectUri   string                 `protobuf:"bytes,1,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	Error         *ErrorResponse         `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -611,6 +604,13 @@ func (x *ConsentResponse) GetRedirectUri() string {
 		return x.RedirectUri
 	}
 	return ""
+}
+
+func (x *ConsentResponse) GetError() *ErrorResponse {
+	if x != nil {
+		return x.Error
+	}
+	return nil
 }
 
 type TokenRequest struct {
@@ -712,6 +712,7 @@ type TokenResponse struct {
 	ExpiresIn     int64                  `protobuf:"varint,3,opt,name=expiresIn,proto3" json:"expiresIn,omitempty"`
 	RefreshToken  string                 `protobuf:"bytes,4,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
 	IdToken       string                 `protobuf:"bytes,5,opt,name=idToken,proto3" json:"idToken,omitempty"`
+	Error         *ErrorResponse         `protobuf:"bytes,6,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -781,6 +782,73 @@ func (x *TokenResponse) GetIdToken() string {
 	return ""
 }
 
+func (x *TokenResponse) GetError() *ErrorResponse {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type ErrorResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	Uri           string                 `protobuf:"bytes,3,opt,name=uri,proto3" json:"uri,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ErrorResponse) Reset() {
+	*x = ErrorResponse{}
+	mi := &file_oauth_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ErrorResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ErrorResponse) ProtoMessage() {}
+
+func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ErrorResponse.ProtoReflect.Descriptor instead.
+func (*ErrorResponse) Descriptor() ([]byte, []int) {
+	return file_oauth_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ErrorResponse) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *ErrorResponse) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ErrorResponse) GetUri() string {
+	if x != nil {
+		return x.Uri
+	}
+	return ""
+}
+
 var File_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_proto_rawDesc = "" +
@@ -793,9 +861,10 @@ const file_oauth_proto_rawDesc = "" +
 	"\rcodeChallenge\x18\x04 \x03(\tR\rcodeChallenge\x120\n" +
 	"\x13codeChallengeMethod\x18\x05 \x03(\tR\x13codeChallengeMethod\x12\x14\n" +
 	"\x05state\x18\x06 \x03(\tR\x05state\x12\x14\n" +
-	"\x05scope\x18\a \x03(\tR\x05scope\"5\n" +
+	"\x05scope\x18\a \x03(\tR\x05scope\"a\n" +
 	"\x11AuthorizeResponse\x12 \n" +
-	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\"\xec\x01\n" +
+	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x12*\n" +
+	"\x05error\x18\x02 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"\xec\x01\n" +
 	"\fLoginRequest\x12\x16\n" +
 	"\x06flowId\x18\x01 \x01(\tR\x06flowId\x12\"\n" +
 	"\fresponseType\x18\x02 \x01(\tR\fresponseType\x12\x1a\n" +
@@ -804,11 +873,10 @@ const file_oauth_proto_rawDesc = "" +
 	"\x05state\x18\x05 \x01(\tR\x05state\x12\x14\n" +
 	"\x05scope\x18\x06 \x03(\tR\x05scope\x12\x1a\n" +
 	"\busername\x18\a \x01(\tR\busername\x12\x1a\n" +
-	"\bpassword\x18\b \x01(\tR\bpassword\"\x97\x01\n" +
+	"\bpassword\x18\b \x01(\tR\bpassword\"]\n" +
 	"\rLoginResponse\x12 \n" +
-	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x120\n" +
-	"\x13displayErrorMessage\x18\x02 \x01(\tR\x13displayErrorMessage\x122\n" +
-	"\x14internalErrorMessage\x18\x03 \x01(\tR\x14internalErrorMessage\"\x8b\x02\n" +
+	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x12*\n" +
+	"\x05error\x18\x02 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"\x8b\x02\n" +
 	"\x0fRegisterRequest\x12\x16\n" +
 	"\x06flowId\x18\x01 \x01(\tR\x06flowId\x12\"\n" +
 	"\fresponseType\x18\x02 \x01(\tR\fresponseType\x12\x1a\n" +
@@ -818,20 +886,20 @@ const file_oauth_proto_rawDesc = "" +
 	"\x05scope\x18\x06 \x03(\tR\x05scope\x12\x1a\n" +
 	"\busername\x18\a \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\b \x01(\tR\bpassword\x12\x1a\n" +
-	"\bfullName\x18\t \x01(\tR\bfullName\"\x9a\x01\n" +
+	"\bfullName\x18\t \x01(\tR\bfullName\"`\n" +
 	"\x10RegisterResponse\x12 \n" +
-	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x120\n" +
-	"\x13displayErrorMessage\x18\x02 \x01(\tR\x13displayErrorMessage\x122\n" +
-	"\x14internalErrorMessage\x18\x03 \x01(\tR\x14internalErrorMessage\"\xb6\x01\n" +
+	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x12*\n" +
+	"\x05error\x18\x02 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"\xb6\x01\n" +
 	"\x0eConsentRequest\x12\x16\n" +
 	"\x06flowId\x18\x01 \x01(\tR\x06flowId\x12\"\n" +
 	"\fresponseType\x18\x02 \x01(\tR\fresponseType\x12\x1a\n" +
 	"\bclientId\x18\x03 \x01(\tR\bclientId\x12 \n" +
 	"\vredirectUri\x18\x04 \x01(\tR\vredirectUri\x12\x14\n" +
 	"\x05state\x18\x05 \x01(\tR\x05state\x12\x14\n" +
-	"\x05scope\x18\x06 \x03(\tR\x05scope\"3\n" +
+	"\x05scope\x18\x06 \x03(\tR\x05scope\"_\n" +
 	"\x0fConsentResponse\x12 \n" +
-	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\"\xd0\x01\n" +
+	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x12*\n" +
+	"\x05error\x18\x02 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"\xd0\x01\n" +
 	"\fTokenRequest\x12\x16\n" +
 	"\x06flowId\x18\x01 \x01(\tR\x06flowId\x12\x1c\n" +
 	"\tgrantType\x18\x02 \x01(\tR\tgrantType\x12\x1a\n" +
@@ -839,13 +907,18 @@ const file_oauth_proto_rawDesc = "" +
 	"\x04code\x18\x04 \x01(\tR\x04code\x12 \n" +
 	"\vredirectUri\x18\x05 \x01(\tR\vredirectUri\x12\"\n" +
 	"\fcodeVerifier\x18\x06 \x01(\tR\fcodeVerifier\x12\x14\n" +
-	"\x05scope\x18\a \x03(\tR\x05scope\"\xab\x01\n" +
+	"\x05scope\x18\a \x03(\tR\x05scope\"\xd7\x01\n" +
 	"\rTokenResponse\x12 \n" +
 	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\x1c\n" +
 	"\ttokenType\x18\x02 \x01(\tR\ttokenType\x12\x1c\n" +
 	"\texpiresIn\x18\x03 \x01(\x03R\texpiresIn\x12\"\n" +
 	"\frefreshToken\x18\x04 \x01(\tR\frefreshToken\x12\x18\n" +
-	"\aidToken\x18\x05 \x01(\tR\aidToken2\xa6\x02\n" +
+	"\aidToken\x18\x05 \x01(\tR\aidToken\x12*\n" +
+	"\x05error\x18\x06 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"W\n" +
+	"\rErrorResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x10\n" +
+	"\x03uri\x18\x03 \x01(\tR\x03uri2\xa6\x02\n" +
 	"\x05Oauth\x12>\n" +
 	"\tAuthorize\x12\x17.oauth.AuthorizeRequest\x1a\x18.oauth.AuthorizeResponse\x122\n" +
 	"\x05Login\x12\x13.oauth.LoginRequest\x1a\x14.oauth.LoginResponse\x12;\n" +
@@ -865,7 +938,7 @@ func file_oauth_proto_rawDescGZIP() []byte {
 	return file_oauth_proto_rawDescData
 }
 
-var file_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_oauth_proto_goTypes = []any{
 	(*AuthorizeRequest)(nil),  // 0: oauth.AuthorizeRequest
 	(*AuthorizeResponse)(nil), // 1: oauth.AuthorizeResponse
@@ -877,23 +950,29 @@ var file_oauth_proto_goTypes = []any{
 	(*ConsentResponse)(nil),   // 7: oauth.ConsentResponse
 	(*TokenRequest)(nil),      // 8: oauth.TokenRequest
 	(*TokenResponse)(nil),     // 9: oauth.TokenResponse
+	(*ErrorResponse)(nil),     // 10: oauth.ErrorResponse
 }
 var file_oauth_proto_depIdxs = []int32{
-	0, // 0: oauth.Oauth.Authorize:input_type -> oauth.AuthorizeRequest
-	2, // 1: oauth.Oauth.Login:input_type -> oauth.LoginRequest
-	4, // 2: oauth.Oauth.Register:input_type -> oauth.RegisterRequest
-	6, // 3: oauth.Oauth.Consent:input_type -> oauth.ConsentRequest
-	8, // 4: oauth.Oauth.Token:input_type -> oauth.TokenRequest
-	1, // 5: oauth.Oauth.Authorize:output_type -> oauth.AuthorizeResponse
-	3, // 6: oauth.Oauth.Login:output_type -> oauth.LoginResponse
-	5, // 7: oauth.Oauth.Register:output_type -> oauth.RegisterResponse
-	7, // 8: oauth.Oauth.Consent:output_type -> oauth.ConsentResponse
-	9, // 9: oauth.Oauth.Token:output_type -> oauth.TokenResponse
-	5, // [5:10] is the sub-list for method output_type
-	0, // [0:5] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	10, // 0: oauth.AuthorizeResponse.error:type_name -> oauth.ErrorResponse
+	10, // 1: oauth.LoginResponse.error:type_name -> oauth.ErrorResponse
+	10, // 2: oauth.RegisterResponse.error:type_name -> oauth.ErrorResponse
+	10, // 3: oauth.ConsentResponse.error:type_name -> oauth.ErrorResponse
+	10, // 4: oauth.TokenResponse.error:type_name -> oauth.ErrorResponse
+	0,  // 5: oauth.Oauth.Authorize:input_type -> oauth.AuthorizeRequest
+	2,  // 6: oauth.Oauth.Login:input_type -> oauth.LoginRequest
+	4,  // 7: oauth.Oauth.Register:input_type -> oauth.RegisterRequest
+	6,  // 8: oauth.Oauth.Consent:input_type -> oauth.ConsentRequest
+	8,  // 9: oauth.Oauth.Token:input_type -> oauth.TokenRequest
+	1,  // 10: oauth.Oauth.Authorize:output_type -> oauth.AuthorizeResponse
+	3,  // 11: oauth.Oauth.Login:output_type -> oauth.LoginResponse
+	5,  // 12: oauth.Oauth.Register:output_type -> oauth.RegisterResponse
+	7,  // 13: oauth.Oauth.Consent:output_type -> oauth.ConsentResponse
+	9,  // 14: oauth.Oauth.Token:output_type -> oauth.TokenResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_oauth_proto_init() }
@@ -907,7 +986,7 @@ func file_oauth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_oauth_proto_rawDesc), len(file_oauth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

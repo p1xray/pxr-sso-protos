@@ -24,6 +24,7 @@ message AuthorizeRequest {
 
 message AuthorizeResponse {
   string redirectUri = 1;
+  ErrorResponse error = 2;
 }
 
 message LoginRequest {
@@ -39,8 +40,7 @@ message LoginRequest {
 
 message LoginResponse {
   string redirectUri = 1;
-  string displayErrorMessage = 2;
-  string internalErrorMessage = 3;
+  ErrorResponse error = 2;
 }
 
 message RegisterRequest {
@@ -57,8 +57,7 @@ message RegisterRequest {
 
 message RegisterResponse {
   string redirectUri = 1;
-  string displayErrorMessage = 2;
-  string internalErrorMessage = 3;
+  ErrorResponse error = 2;
 }
 
 message ConsentRequest {
@@ -72,6 +71,7 @@ message ConsentRequest {
 
 message ConsentResponse {
   string redirectUri = 1;
+  ErrorResponse error = 2;
 }
 
 message TokenRequest {
@@ -90,4 +90,11 @@ message TokenResponse {
   int64 expiresIn = 3;
   string refreshToken = 4;
   string idToken = 5;
+  ErrorResponse error = 6;
+}
+
+message ErrorResponse {
+  string code = 1;
+  string description = 2;
+  string uri = 3;
 }
