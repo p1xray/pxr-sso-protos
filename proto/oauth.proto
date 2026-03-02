@@ -75,13 +75,14 @@ message ConsentResponse {
 }
 
 message TokenRequest {
-  string flowId = 1;
-  string grantType = 2;
-  string clientId = 3;
+  string grantType = 1;
+  string clientId = 2;
+  string clientSecret = 3;
   string code = 4;
   string redirectUri = 5;
   string codeVerifier = 6;
-  repeated string scope = 7;
+  string audience = 7;
+  repeated string scope = 8;
 }
 
 message TokenResponse {
