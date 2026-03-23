@@ -29,7 +29,8 @@ type AuthorizeRequest struct {
 	CodeChallenge       []string               `protobuf:"bytes,4,rep,name=codeChallenge,proto3" json:"codeChallenge,omitempty"`
 	CodeChallengeMethod []string               `protobuf:"bytes,5,rep,name=codeChallengeMethod,proto3" json:"codeChallengeMethod,omitempty"`
 	State               []string               `protobuf:"bytes,6,rep,name=state,proto3" json:"state,omitempty"`
-	Scope               []string               `protobuf:"bytes,7,rep,name=scope,proto3" json:"scope,omitempty"`
+	Audience            []string               `protobuf:"bytes,7,rep,name=audience,proto3" json:"audience,omitempty"`
+	Scope               []string               `protobuf:"bytes,8,rep,name=scope,proto3" json:"scope,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -102,6 +103,13 @@ func (x *AuthorizeRequest) GetCodeChallengeMethod() []string {
 func (x *AuthorizeRequest) GetState() []string {
 	if x != nil {
 		return x.State
+	}
+	return nil
+}
+
+func (x *AuthorizeRequest) GetAudience() []string {
+	if x != nil {
+		return x.Audience
 	}
 	return nil
 }
@@ -837,15 +845,16 @@ var File_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_proto_rawDesc = "" +
 	"\n" +
-	"\voauth.proto\x12\x05oauth\"\xf8\x01\n" +
+	"\voauth.proto\x12\x05oauth\"\x94\x02\n" +
 	"\x10AuthorizeRequest\x12\"\n" +
 	"\fresponseType\x18\x01 \x03(\tR\fresponseType\x12\x1a\n" +
 	"\bclientId\x18\x02 \x03(\tR\bclientId\x12 \n" +
 	"\vredirectUri\x18\x03 \x03(\tR\vredirectUri\x12$\n" +
 	"\rcodeChallenge\x18\x04 \x03(\tR\rcodeChallenge\x120\n" +
 	"\x13codeChallengeMethod\x18\x05 \x03(\tR\x13codeChallengeMethod\x12\x14\n" +
-	"\x05state\x18\x06 \x03(\tR\x05state\x12\x14\n" +
-	"\x05scope\x18\a \x03(\tR\x05scope\"a\n" +
+	"\x05state\x18\x06 \x03(\tR\x05state\x12\x1a\n" +
+	"\baudience\x18\a \x03(\tR\baudience\x12\x14\n" +
+	"\x05scope\x18\b \x03(\tR\x05scope\"a\n" +
 	"\x11AuthorizeResponse\x12 \n" +
 	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x12*\n" +
 	"\x05error\x18\x02 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"\xec\x01\n" +

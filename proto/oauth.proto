@@ -19,7 +19,8 @@ message AuthorizeRequest {
   repeated string codeChallenge = 4;
   repeated string codeChallengeMethod = 5;
   repeated string state = 6;
-  repeated string scope = 7;
+  repeated string audience = 7;
+  repeated string scope = 8;
 }
 
 message AuthorizeResponse {
