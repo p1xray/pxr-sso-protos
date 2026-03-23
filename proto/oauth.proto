@@ -77,12 +77,11 @@ message ConsentResponse {
 message TokenRequest {
   string grantType = 1;
   string clientId = 2;
-  string clientSecret = 3;
-  string code = 4;
-  string redirectUri = 5;
-  string codeVerifier = 6;
-  string audience = 7;
-  repeated string scope = 8;
+  string code = 3;
+  string redirectUri = 4;
+  string codeVerifier = 5;
+  string audience = 6;
+  repeated string scope = 7;
 }
 
 message TokenResponse {

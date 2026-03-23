@@ -617,12 +617,11 @@ type TokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GrantType     string                 `protobuf:"bytes,1,opt,name=grantType,proto3" json:"grantType,omitempty"`
 	ClientId      string                 `protobuf:"bytes,2,opt,name=clientId,proto3" json:"clientId,omitempty"`
-	ClientSecret  string                 `protobuf:"bytes,3,opt,name=clientSecret,proto3" json:"clientSecret,omitempty"`
-	Code          string                 `protobuf:"bytes,4,opt,name=code,proto3" json:"code,omitempty"`
-	RedirectUri   string                 `protobuf:"bytes,5,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
-	CodeVerifier  string                 `protobuf:"bytes,6,opt,name=codeVerifier,proto3" json:"codeVerifier,omitempty"`
-	Audience      string                 `protobuf:"bytes,7,opt,name=audience,proto3" json:"audience,omitempty"`
-	Scope         []string               `protobuf:"bytes,8,rep,name=scope,proto3" json:"scope,omitempty"`
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	RedirectUri   string                 `protobuf:"bytes,4,opt,name=redirectUri,proto3" json:"redirectUri,omitempty"`
+	CodeVerifier  string                 `protobuf:"bytes,5,opt,name=codeVerifier,proto3" json:"codeVerifier,omitempty"`
+	Audience      string                 `protobuf:"bytes,6,opt,name=audience,proto3" json:"audience,omitempty"`
+	Scope         []string               `protobuf:"bytes,7,rep,name=scope,proto3" json:"scope,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -667,13 +666,6 @@ func (x *TokenRequest) GetGrantType() string {
 func (x *TokenRequest) GetClientId() string {
 	if x != nil {
 		return x.ClientId
-	}
-	return ""
-}
-
-func (x *TokenRequest) GetClientSecret() string {
-	if x != nil {
-		return x.ClientSecret
 	}
 	return ""
 }
@@ -907,16 +899,15 @@ const file_oauth_proto_rawDesc = "" +
 	"\x05scope\x18\x06 \x03(\tR\x05scope\"_\n" +
 	"\x0fConsentResponse\x12 \n" +
 	"\vredirectUri\x18\x01 \x01(\tR\vredirectUri\x12*\n" +
-	"\x05error\x18\x02 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"\xf8\x01\n" +
+	"\x05error\x18\x02 \x01(\v2\x14.oauth.ErrorResponseR\x05error\"\xd4\x01\n" +
 	"\fTokenRequest\x12\x1c\n" +
 	"\tgrantType\x18\x01 \x01(\tR\tgrantType\x12\x1a\n" +
-	"\bclientId\x18\x02 \x01(\tR\bclientId\x12\"\n" +
-	"\fclientSecret\x18\x03 \x01(\tR\fclientSecret\x12\x12\n" +
-	"\x04code\x18\x04 \x01(\tR\x04code\x12 \n" +
-	"\vredirectUri\x18\x05 \x01(\tR\vredirectUri\x12\"\n" +
-	"\fcodeVerifier\x18\x06 \x01(\tR\fcodeVerifier\x12\x1a\n" +
-	"\baudience\x18\a \x01(\tR\baudience\x12\x14\n" +
-	"\x05scope\x18\b \x03(\tR\x05scope\"\xd7\x01\n" +
+	"\bclientId\x18\x02 \x01(\tR\bclientId\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12 \n" +
+	"\vredirectUri\x18\x04 \x01(\tR\vredirectUri\x12\"\n" +
+	"\fcodeVerifier\x18\x05 \x01(\tR\fcodeVerifier\x12\x1a\n" +
+	"\baudience\x18\x06 \x01(\tR\baudience\x12\x14\n" +
+	"\x05scope\x18\a \x03(\tR\x05scope\"\xd7\x01\n" +
 	"\rTokenResponse\x12 \n" +
 	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\x1c\n" +
 	"\ttokenType\x18\x02 \x01(\tR\ttokenType\x12\x1c\n" +
