@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package oidc;
+
+import "session.proto";
+
+option go_package = "github.com/p1xray/pxr-sso-protos/gen/go/oidc;oidcpb";
+
+service Oidc {
+  rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse);
+  rpc Token (TokenRequest) returns (TokenResponse);
+}
+
+message AuthorizeRequest {
+  repeated string responseType = 1;
+  repeated string prompt = 2;
+  repeated string clientId = 3;
+  repeated string redirectUri = 4;
+  repeated string codeChallenge = 5;
+  repeated string codeChallengeMethod = 6;
+  repeated string state = 7;
+  repeated string audience = 8;
+  repeated string scope = 9;
+  repeated session.Cookie sessions = 10;
+}
+
+message AuthorizeResponse {
+  string redirectUri = 1;
+}
+
+message TokenRequest {
+  string grantType = 1;
+  string clientId = 2;
+  string code = 3;
+  string redirectUri = 4;
+  string codeVerifier = 5;
+}
+
+message TokenResponse {
+  string accessToken = 1;
+  string tokenType = 2;
+  int64 expiresIn = 3;
+  string refreshToken = 4;
+  string idToken = 5;
+}

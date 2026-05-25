@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package auth;
+
+import "session.proto";
+
+option go_package = "github.com/p1xray/pxr-sso-protos/gen/go/auth;authpb";
+
+service Auth {
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Consent (ConsentRequest) returns (ConsentResponse);
+}
+
+message LoginRequest {
+  string requestUri = 1;
+  string username = 2;
+  string password = 3;
+}
+
+message LoginResponse {
+  string redirectUri = 1;
+  session.Cookie session = 2;
+}
+
+message RegisterRequest {
+  string requestUri = 1;
+  string username = 2;
+  string password = 3;
+  string fullName = 4;
+}
+
+message RegisterResponse {
+  string redirectUri = 1;
+  session.Cookie session = 2;
+}
+
+message ConsentRequest {
+  string requestUri = 1;
+  repeated string scopes = 2;
+  repeated session.Cookie sessions = 3;
+
+}
+
+message ConsentResponse {
+  string redirectUri = 1;
+}

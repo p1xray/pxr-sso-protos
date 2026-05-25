@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package session;
+
+option go_package = "github.com/p1xray/pxr-sso-protos/gen/go/session;authsessionpb";
+
+message Cookie {
+  string name = 1;
+  string value = 2;
+}
