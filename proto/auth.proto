@@ -10,6 +10,7 @@ service Auth {
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Consent (ConsentRequest) returns (ConsentResponse);
+  rpc GetConsentCard(GetConsentCardRequest) returns (GetConsentCardResponse);
 }
 
 message LoginRequest {
@@ -44,4 +45,19 @@ message ConsentRequest {
 
 message ConsentResponse {
   string redirectUri = 1;
+}
+
+message GetConsentCardRequest {
+  string requestUri = 1;
+}
+
+message GetConsentCardResponse {
+  repeated ConsentScope scopes = 1;
+}
+
+message ConsentScope {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+  bool isGranted = 4;
 }
